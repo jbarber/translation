@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portuguese to English Translator</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div id="flash-message" class="flash-message hidden">Error occurred</div>
+
+      <!-- API Key Input -->
+      <div class="api-key-container">
+        <div>
+          <p>Uses Google Cloud Platform to translates Portuguese text to English and copy edit with the Gemini LLM.</p>
+
+          <p>Has to be served on localhost because of CORS: <code>python -m http.server 9000</code></p>
+
+          <p>Requires a GCP account with the <a href="https://console.cloud.google.com/apis/api/translate.googleapis.com/metrics">Translate</a> and <a href="https://console.cloud.google.com/apis/api/aiplatform.googleapis.com/metrics">Vertix</a> APIs enabled. Generate the API key with the command: <code>gcloud config set project $PROJECT_ID && gcloud auth print-access-token</code></p>
+        </div>
+
+        <div>
+          <label for="gcp-project-input">GCP project ID:</label>
+          <input type="text" id="gcp-project-input" placeholder="Enter your GCP project ID">
+
+          <label for="api-key-input">API Key:</label>
+          <input type="text" id="api-key-input" placeholder="Enter your API key">
+          <button id="clear-api-token" class="action-btn">X</button>
+        </div>
+      </div>
+
+      <div class="translation-form">
+        <button id="clear-all-text" class="action-btn">Clear all text</button>
+
+        <div contenteditable id="original-text" class="text" placeholder="Paste your Portuguese text here"></div>
+        <button id="translate-btn" class="action-btn">
+          <span id="translate-text">Translate</span>
+          <div class="spinner hidden"></div>
+        </button>
+
+        <div contenteditable id="translated-text" class="text" readonly placeholder="Translated English text will appear here"></div>
+
+        <button id="cleanup-btn" class="action-btn">
+          <span id="cleanup-text">Copy edit with AI</span>
+          <div class="spinner hidden"></div>
+        </button>
+
+        <div contenteditable id="cleanedup-text" class="text" readonly placeholder="Final text will appear here"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
